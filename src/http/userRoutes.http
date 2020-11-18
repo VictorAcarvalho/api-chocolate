@@ -1,0 +1,26 @@
+GET http://localhost:3000/user
+
+###
+POST http://localhost:3003/user HTTP/1.1
+Content-Type: application/json
+
+{
+    "name":"ho",
+    "email":"adsad@kimail.",
+    "password":"1234567"
+}
+
+###
+#Lista um único usuário
+GET http://localhost:3000/user/5fa756276dda8a28f06307a2
+
+###
+PUT http://localhost:3000/user/5fb053ab256c753a7ac24bd5
+Content-Type: application/json
+
+{
+    "name":"Victão"
+}
+
+###
+DELETE http://localhost:3000/user/55fb053ab256c753a7ac24bd5
