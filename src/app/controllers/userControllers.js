@@ -54,7 +54,7 @@ class UserControllers{
  async auth(req,res){
         const {email, password} = req.body;
 
-        const user = await userModel.findOne({email}).select('password');
+        const user = await userModel.findOne({email});
         if(!email){
             return res.status(401).json({msg:"Credenciais inválidas"});
         }   
