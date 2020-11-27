@@ -1,5 +1,5 @@
 {
-  "name": "nodeTest",
+  "name": "api-chocolate",
   "version": "1.0.0",
   "description": "",
   "main": "src/api.js",
@@ -21,7 +21,9 @@
   },
   "devDependencies": {
     "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "winston": "^3.3.3"
   }
 }

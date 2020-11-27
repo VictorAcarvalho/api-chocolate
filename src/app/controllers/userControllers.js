@@ -2,6 +2,8 @@ const userModel = require('../model/userModel');
 const bcrypt =require ('bcryptjs');
 const userServices = require('../../services/userService');
 const emailConfig = require('../../config/email');
+const jwt = require('jsonwebtoken');
+const logger = require('../../helper/logger')
 
 
 class UserControllers{
@@ -21,7 +23,7 @@ class UserControllers{
             to,
             from:"carvalho.victorfa@gmail.com ",
             subject:"cadastro usuário",
-            template:"cadastroUsuario",
+            template:"mail.hbs",
             text:'Olá,seja bem vindo',
             context:{
                 message:'Teste de valor de variável',
@@ -55,15 +57,21 @@ class UserControllers{
         const {email, password} = req.body;
 
         const user = await userModel.findOne({email}).select('password');
-        if(!email){
+        if(!user){
             return res.status(401).json({msg:"Credenciais inválidas"});
         }   
 
-        await bcrypt.compare(password,use.password,{select:true});
+        await bcrypt.compare(password,user.password);
         if(!password){
-            return res.status(401).json({msg:"Credenciais inválidas"})
-        } 
-        return res.status(200).json({msg:"Usuário logado com sucesso"});
+            return res.status(401).json({msg:"Credenciais inválidas"});
+      };
+      
+      const {_id:id} = user;
+        const token = jwt.sign({ id,type:'admin'}, '123deoliveira4',{expiresIn:'1d'});
+
+      
+
+        return res.status(200).json({token});
     };
 
 };
